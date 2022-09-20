@@ -1,13 +1,9 @@
 package ru.baib.testendpoint.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import ru.baib.testendpoint.entity.Amortization;
 
-import java.util.List;
 import java.util.UUID;
 
-public interface AmortizationsRepository extends CrudRepository<Amortization, UUID> {
-
-    @Override
-    List<Amortization> findAll();
+public interface AmortizationsRepository extends JpaRepository<Amortization, UUID> {
 }

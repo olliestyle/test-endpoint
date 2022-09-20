@@ -4,6 +4,8 @@ import com.rzd.task.api.AmortizationsApiDelegate;
 import com.rzd.task.dto.AmortizationDto;
 import com.rzd.task.dto.AmortizationFilterDto;
 import com.rzd.task.dto.AmortizationViewDto;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +42,10 @@ public class AmortizationsApiDelegateImpl implements AmortizationsApiDelegate {
 
     @Override
     public ResponseEntity<List<AmortizationViewDto>> getAmortizations(AmortizationFilterDto filter, Pageable page) {
+        ExampleMatcher matcher = ExampleMatcher.matching().withIgnoreNullValues();
+        Example<Amortization> example = Example.of(amortizationMapper.amortizationFilterDtoToAmortization(filter), matcher);
         return new ResponseEntity<>(
-                amortizationsRepository.findAll()
+                amortizationsRepository.findAll(example, page)
                         .stream()
                         .map(amortizationMapper::amortizationToAmortizationViewDto)
                         .collect(Collectors.toList()),

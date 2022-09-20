@@ -1,6 +1,7 @@
 package ru.baib.testendpoint.mapper;
 
 import com.rzd.task.dto.AmortizationDto;
+import com.rzd.task.dto.AmortizationFilterDto;
 import com.rzd.task.dto.AmortizationViewDto;
 import org.mapstruct.Mapper;
 import ru.baib.testendpoint.entity.Amortization;
@@ -10,4 +11,5 @@ public interface AmortizationMapper {
 
     Amortization amortizationDtoToAmortization(AmortizationDto amortizationDto);
     AmortizationViewDto amortizationToAmortizationViewDto(Amortization amortization);
+    Amortization amortizationFilterDtoToAmortization(AmortizationFilterDto amortizationFilterDto);
 }
